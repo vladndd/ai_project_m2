@@ -16,20 +16,48 @@ automatique des données issues des réglementations dans le monde »*.
 ## Prérequis
 
 - Python 3.9 ou plus récent
-- Poppler (fournit `pdftotext`, utilisé pour lire les PDF)
+- Poppler (fournit `pdftotext`, `pdffonts` et `pdftoppm`, utilisés pour lire les PDF)
   - macOS : `brew install poppler`
   - Ubuntu/Debian : `sudo apt-get install poppler-utils`
+  - Windows : installer Poppler et ajouter le dossier `bin` au `PATH`
+- Tesseract est optionnel : il sert seulement à tester l'OCR sur les PDF scannés
+  - macOS : `brew install tesseract`
+  - Ubuntu/Debian : `sudo apt-get install tesseract-ocr`
 - Une clé API Anthropic, OpenAI **ou Gemini**, **uniquement si vous voulez activer l'extraction par LLM**
   (sans clé, l'outil fonctionne quand même en mode gratuit, voir plus bas)
 
-## Installation (une seule fois)
+## Installation reproductible avec environnement virtuel
 
+### macOS / Linux
 ```bash
 cd "Livrables"
-pip3 install pdfplumber pandas
-pip3 install anthropic   # si vous utilisez Claude (--provider anthropic, par défaut)
-pip3 install openai      # si vous utilisez GPT (--provider openai)
-pip3 install google-genai # si vous utilisez Gemini (--provider gemini)
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+### Windows PowerShell
+```powershell
+cd Livrables
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+### Clé API LLM
+
+Copier le modèle `.env.example` vers `.env`, puis remplir la clé du fournisseur choisi :
+
+```bash
+cp .env.example .env
+```
+
+Exemple pour Gemini dans `.env` :
+
+```text
+GEMINI_API_KEY=votre_cle_api
 ```
 
 ## Exécution
@@ -41,7 +69,7 @@ N'utilise que les approches par règles (regex) et par analyse de la mise en pag
 déjà structurés en tableau (ex. Codex, UE).
 
 ```bash
-python3 extraire_reglementation.py "data/pdf_samples/codex_192_1995_additives.pdf" --pays "Codex" --no-llm
+python extraire_reglementation.py "data/pdf_samples/codex_192_1995_additives.pdf" --pays "Codex" --no-llm
 ```
 
 ### Mode 2 — avec extraction par LLM (recommandé, généralise à tout pays/langue)
@@ -49,31 +77,31 @@ python3 extraire_reglementation.py "data/pdf_samples/codex_192_1995_additives.pd
 Avec **Claude** (Anthropic, par défaut) :
 ```bash
 export ANTHROPIC_API_KEY="votre_cle_api"
-python3 extraire_reglementation.py "data/pdf_samples/thailand_414_2020_contaminants.pdf" --pays "Thaïlande"
+python extraire_reglementation.py "data/pdf_samples/thailand_414_2020_contaminants.pdf" --pays "Thaïlande"
 ```
 
 Avec **GPT** (OpenAI) :
 ```bash
 export OPENAI_API_KEY="votre_cle_api"
-python3 extraire_reglementation.py "data/pdf_samples/thailand_414_2020_contaminants.pdf" --pays "Thaïlande" --provider openai
+python extraire_reglementation.py "data/pdf_samples/thailand_414_2020_contaminants.pdf" --pays "Thaïlande" --provider openai
 ```
 
 Avec **Gemini** :
 ```bash
 export GEMINI_API_KEY="votre_cle_api"
-python3 extraire_reglementation.py "data/pdf_samples/thailand_414_2020_contaminants.pdf" --pays "Thaïlande" --provider gemini
+python extraire_reglementation.py "data/pdf_samples/thailand_414_2020_contaminants.pdf" --pays "Thaïlande" --provider gemini
 ```
 
 ### Traiter tout un dossier de documents pour un pays
 
 ```bash
-python3 extraire_reglementation.py "data/pdf_samples" --pays "Nom du pays" --provider gemini
+python extraire_reglementation.py "data/pdf_samples" --pays "Nom du pays" --provider gemini
 ```
 
 ### Autres options utiles
 
 ```bash
-python3 extraire_reglementation.py --help
+python extraire_reglementation.py --help
 ```
 
 - `--provider anthropic|openai|gemini` : choisir le fournisseur du LLM (défaut : `anthropic`)
@@ -88,6 +116,22 @@ Deux fichiers, `matrice_<pays>.csv` et `.json`, avec une ligne par règle extrai
 substance, catégorie d'aliment, type de valeur (minimum/maximum/plage/interdiction),
 valeur, unité, conditions, indicateur d'ambiguïté, méthode d'extraction utilisée
 (`regex` / `layout` / `llm_anthropic` / `llm_openai`), et le texte source exact pour vérification.
+
+## Lancer le notebook
+
+Après activation de l'environnement virtuel :
+
+```bash
+python -m notebook Notebook_Extraction_Reglementations.ipynb
+```
+
+Puis dans Jupyter :
+
+```text
+Kernel -> Restart Kernel and Run All Cells
+```
+
+Le notebook lit automatiquement `.env` si le fichier existe dans le dossier `Livrables`.
 
 ## En cas de PDF scanné (sans texte)
 
