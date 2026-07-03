@@ -1,0 +1,23 @@
+﻿country,substance_name,value_type,value_min,value_max,unit,is_ambiguous,extraction_method
+CODEX,Acesulfame potassium,maximum,,350.0,mg/kg,False,llm_api_reel_gemini
+CODEX,Acesulfame potassium,maximum,,2000.0,mg/kg,False,llm_api_reel_gemini
+CODEX,Acesulfame potassium,maximum,,1000.0,mg/kg,False,llm_api_reel_gemini
+CODEX,Acesulfame potassium,maximum,,1000.0,mg/kg,False,llm_api_reel_gemini
+CODEX,Acesulfame potassium,maximum,,350.0,mg/kg,False,llm_api_reel_gemini
+CODEX,Acesulfame potassium,maximum,,350.0,mg/kg,False,llm_api_reel_gemini
+UE,pesticides,maximum,,0.01,mg/kg,False,llm_api_reel_gemini
+UE,pesticides or metabolites of pesticides,maximum,,,mg/kg,True,llm_api_reel_gemini
+Thaïlande,Chloramphenicol and its salts (คลอแรมเฟนิคอลและเกลือของสารนี้),interdiction,,,,True,llm_api_reel_gemini
+Thaïlande,Nitrofurazone and its salts (ไนโทรฟวราโซนและเกลือของสารนี้),interdiction,,,,True,llm_api_reel_gemini
+Thaïlande,Nitrofurantoin and its salts (ไนโทรฟวแรนโทอินและเกลือของสารนี้),interdiction,,,,True,llm_api_reel_gemini
+Thaïlande,Furazolidone and its salts (ฟวราโซลิโดนและเกลือของสารนี้),interdiction,,,,True,llm_api_reel_gemini
+Thaïlande,Furaltadone and its salts (ฟวแรลทาโดนและเกลือของสารนี้),interdiction,,,,True,llm_api_reel_gemini
+Thaïlande,cadmium,maximum,,0.1,mg/kg,False,llm_api_reel_gemini
+Thaïlande,cadmium,maximum,,0.4,mg/kg,False,llm_api_reel_gemini
+Thaïlande,cadmium,maximum,,0.2,mg/kg,False,llm_api_reel_gemini
+Thaïlande,cadmium,maximum,,0.05,mg/kg,False,llm_api_reel_gemini
+Thaïlande,cadmium,maximum,,0.2,mg/kg,False,llm_api_reel_gemini
+Chine,GB 2760-2024 — National Food Safety Standard for Uses of Food Additives,maximum,,3.0,g/kg,True,llm_source_search
+États-Unis,21 CFR §107.100 — Infant formula nutrient specifications,range,,100.0,UI / 100 kcal,True,llm_source_search
+Turquie,Türk Gıda Kodeksi Katkı Maddeleri Yönetmeliği (règlement Codex alimentaire turc sur les additifs),,,,,True,llm_source_search
+Brésil,IN 211/2023 (amendée par IN 356/2025 et IN 452/2026) — ANVISA,maximum,,0.01,mg/kg,True,llm_source_search
