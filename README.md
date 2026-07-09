@@ -7,8 +7,7 @@ automatique des données issues des réglementations dans le monde »*.
 
 | Fichier | Rôle |
 |---|---|
-| `Rapport_Projet_Reglementations.docx` | Raisonnement complet : hypothèses testées, pistes abandonnées, méthodes essayées, évaluation, limites, questions pour la suite. |
-| `Notebook_Extraction_Reglementations.ipynb` | Notebook Jupyter : code des 3 approches testées, résultats sur les échantillons Codex/UE/Inde/Thaïlande, graphique de comparaison. |
+| `Notebook_Extraction_Reglementations.ipynb` | Notebook Jupyter : raisonnement complet (hypothèses testées, pistes abandonnées, évaluation, limites), code des 3 approches testées, résultats sur les échantillons Codex/UE/Inde/Thaïlande, graphique de comparaison. |
 | `extraire_reglementation.py` | **L'outil exécutable** : script en ligne de commande qui transforme un PDF réglementaire en matrice structurée. |
 | `data/pdf_samples/` | Les documents sources utilisés pour les tests (Codex, UE, Inde, Thaïlande). |
 | `matrice_reglementaire_consolidee.csv` | Exemple de matrice consolidée produite par le notebook. |
@@ -136,11 +135,11 @@ Le notebook lit automatiquement `.env` si le fichier existe dans le dossier `Liv
 ## En cas de PDF scanné (sans texte)
 
 L'outil le détecte automatiquement et prévient qu'une étape d'OCR est nécessaire
-avant extraction (voir section 6.2 du rapport pour le détail de ce cas, rencontré
+avant extraction (voir la section 4.2 du notebook pour le détail de ce cas, rencontré
 sur un document thaïlandais de l'échantillon).
 
 ## Pour comprendre le raisonnement derrière l'outil
 
-Le script est l'implémentation directe des 3 approches comparées dans le rapport
-et le notebook (section 4 du rapport). Pour le contexte, les choix de modélisation
-et l'évaluation chiffrée, se référer à `Rapport_Projet_Reglementations.docx`.
+Le script est l'implémentation directe des 3 approches comparées dans le notebook
+(section 2). Pour le contexte, les choix de modélisation et l'évaluation chiffrée,
+se référer aux sections 1 et 3 du notebook.
